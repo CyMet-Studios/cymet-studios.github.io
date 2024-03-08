@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cymet</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    nav {
+      background-color: #333;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+    }
+
+    .header {
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    p {
+      color: #555;
+    }
+
+    hr {
+      border: 1px solid #ddd;
+    }
+
+    a {
+      color: #007bff;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="deps.html">Departments</a>
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<div class="header">
+  <h1>Welcome to CyMet</h1>
+  <p>We strive to provide experiences that make complex tasks easy for all our users.</p>
+</div>
+
+<hr>
+
+<h3><a href="about.html">How it all started</a></h3>
+<p>CyMet Studios is a leading game development company dedicated to creating exceptional gaming experiences for players worldwide. Established in 2023 <a href="about.html">...Read more</a></p>
+
+<hr>
+
+<h3>The Two Spheres</h3>
+<p>Here are two big spheres of software development: Entertainment and Productive Development.</p>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  // Example: Add a smooth scroll effect for anchor links
+  $('nav a').on('click', function (event) {
+    if (this.hash !== '') {
+      event.preventDefault();
+
+      const hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function () {
+        window.location.hash = hash;
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
