@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cymet</title>
+<style type="text/css">
+  a:visited {
+    color: black;
+    text-decoration: none;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
+  nav {
+    background-color: #333;
+    padding: 15px;
+    text-align: center;
+  }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+  }
+
+  form {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    margin: 10px 0;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    box-sizing: border-box;
+  }
+
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <table>
+    <tr>
+      <td>CYMET</td>
+      <td><a href="/index.html">Home</a></td>
+      <td><a href="/deps.html">Departments</a></td>
+      <td><a href="/about.html">About Us</a></td>
+      <td><a href="/contact.html">Contact</a></td>
+    </tr>
+  </table>
+</nav>
+
+<form id="ticketForm">
+    <h2>Submit a Ticket</h2>
+
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Your Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="ticket">Ticket Description:</label>
+    <textarea id="ticket" name="ticket" rows="4" required></textarea>
+
+    <button type="button" onclick="submitTicket()">Submit Ticket</button>
+</form>
+
+<script>
+function submitTicket() {
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const ticket = document.getElementById('ticket').value;
+  
+  if (name && email && ticket) {
+    fetch('submit-ticket.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, ticket }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.message === 'Ticket submitted successfully!') {
+        alert(data.message);
+      } else {
+        alert('Error submitting ticket. Please try again later.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An unexpected error occurred. Please try again later.');
+    });
+  } else {
+    alert('Please fill in all fields.');
+  }
+}
+</script>
+</body>
+</html>
