@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cymet</title>
+<style type="text/css">
+  a:visited {
+    color: black;
+    text-decoration: none;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
+  nav {
+    background-color: #333;
+    padding: 15px;
+    text-align: center;
+  }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  .img-comp-container {
+    position: relative;
+    height: 200px; /*should be the same height as the images*/
+    margin-top: 20px;
+  }
+
+  .img-comp-img {
+    position: absolute;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+  }
+
+  .img-comp-img img {
+    display: block;
+    vertical-align: middle;
+  }
+
+  .img-comp-slider {
+    position: absolute;
+    z-index: 9;
+    cursor: ew-resize;
+    /*set the appearance of the slider:*/
+    width: 40px;
+    height: 40px;
+    background-color: #2196F3;
+    opacity: 0.7;
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <table>
+    <tr>
+      <td>CYMET</td>
+      <td><a href="index.html">Home</a></td>
+      <td><a href="deps.html">Departments</a></td>
+      <td><a href="about.html">About Us</a></td>
+      <td><a href="contact.html">Contact</a></td>
+    </tr>
+  </table>
+</nav>
+
+<h3>The Two Spheres</h3>
+<p>Here are two big spheres of software development: Entertainment and Productive Development.</p>
+<a href="/deps/ent.html">Entertainment</a>
+<a href="/deps/prod.html" style="float: right;">Production</a>
+
+<div class="img-comp-container">
+  <div class="img-comp-img">
+    <img src="/deps/pics/redearth1.jpg" width="300" height="200" usemap="#imgmap2">
+    <map name="imgmap2">
+      <area target="" alt="" title="" href="/storage/emulated/0/cymet.net/htdocs/deps/ent.html" coords="216,276,7,275" shape="rect">
+    </map>
+  </div>
+  <div class="img-comp-img img-comp-overlay">
+    <img src="/deps/pics/blueearth1.jpg" width="300" height="200" usemap="#image-map">
+    <map name="image-map">
+      <area target="" alt="" title="" href="/storage/emulated/0/CyMet.net/htdocs/deps/prod.html" coords="627,270,414,210" shape="rect">
+    </map>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function initComparisons() {
+    var x, i;
+    x = document.getElementsByClassName("img-comp-overlay");
+    for (i = 0; i < x.length; i++) {
+      compareImages(x[i]);
+    }
+
+    function compareImages(img) {
+      var slider, clicked = 0, w, h;
+      w = img.offsetWidth;
+      h = img.offsetHeight;
+      img.style.width = (w / 2) + "px";
+      slider = document.createElement("DIV");
+      slider.setAttribute("class", "img-comp-slider");
+      img.parentElement.insertBefore(slider, img);
+      slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+      slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+      slider.addEventListener("mousedown", slideReady);
+      window.addEventListener("mouseup", slideFinish);
+      slider.addEventListener("touchstart", slideReady);
+      window.addEventListener("touchend", slideFinish);
+
+      function slideReady(e) {
+        e.preventDefault();
+        clicked = 1;
+        window.addEventListener("mousemove", slideMove);
+        window.addEventListener("touchmove", slideMove);
+      }
+
+      function slideFinish() {
+        clicked = 0;
+      }
+
+      function slideMove(e) {
+        var pos;
+        if (clicked == 0) return false;
+        pos = getCursorPos(e)
+        if (pos < 0) pos = 0;
+        if (pos > w) pos = w;
+        slide(pos);
+      }
+
+      function getCursorPos(e) {
+        var a, x = 0;
+        e = (e.changedTouches) ? e.changedTouches[0] : e;
+        a = img.getBoundingClientRect();
+        x = e.pageX - a.left;
+        x = x - window.pageXOffset;
+        return x;
+      }
+
+      function slide(x) {
+        img.style.width = x + "px";
+        slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+      }
+    }
+  }
+
+  initComparisons();
+</script>
+
+</body>
+  </html>
